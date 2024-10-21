@@ -1,0 +1,14 @@
+{% extends 'sales/base.html' %}
+
+{% block title %}Добавить продажу{% endblock %}
+
+{% block content %}
+<h1>Добавить продажу</h1>
+<form method="post" class="row g-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'sales/base.html' %}
+
+{% block title %}Customers List{% endblock %}
+
+{% block content %}
+<h1>Customers</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Телефон</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.first_name }}</td>
+            <td>{{ customer.last_name }}</td>
+            <td>{{ customer.phone }}</td>
+            <td>{{ customer.email }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'add_customer' %}" class="btn btn-primary">Добавить покупателя</a>
+{% endblock %}

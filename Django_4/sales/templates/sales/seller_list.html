@@ -1,0 +1,32 @@
+{% extends 'sales/base.html' %}
+
+{% block title %}Список продавцов{% endblock %}
+
+{% block content %}
+<h1>Список продавцов</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Телефон</th>
+            <th>Email</th>
+            <th>Дата приёма на работу</th>
+            <th>Позиция</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for seller in sellers %}
+        <tr>
+            <td>{{ seller.first_name }}</td>
+            <td>{{ seller.last_name }}</td>
+            <td>{{ seller.phone }}</td>
+            <td>{{ seller.email }}</td>
+            <td>{{ seller.hire_date }}</td>
+            <td>{{ seller.get_position_display }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'add_seller' %}" class="btn btn-primary">Добавить продавца</a>
+{% endblock %}
