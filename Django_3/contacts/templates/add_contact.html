@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Добавить контакт{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Добавить контакт</h1>
+<form method="POST">
+  {% csrf_token %}
+  {{ form|crispy }}  <!-- Используем crispy для стилизации -->
+  <button type="submit" class="btn btn-success">Добавить</button>
+  <a href="{% url 'contact_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}
+
+
+

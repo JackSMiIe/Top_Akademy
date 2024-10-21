@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Редактировать контакт{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Редактировать контакт</h1>
+<form method="POST">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button type="submit" class="btn btn-success">Сохранить изменения</button>
+  <a href="{% url 'contact_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}
