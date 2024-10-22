@@ -1,0 +1,7 @@
+<h2>{{ restaurant.name }}</h2>
+<p>Адрес: {{ restaurant.address }}</p>
+<p>Телефон: {{ restaurant.phone }}</p>
+<p>Описание: {{ restaurant.description }}</p>
+<p>Специализация: {{ restaurant.specialization.name }}</p>
+<a href="{% url 'edit_restaurant' restaurant.id %}">Редактировать</a>
+<a href="{% url 'home' %}">На главную</a>
