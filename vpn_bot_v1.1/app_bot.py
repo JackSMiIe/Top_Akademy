@@ -1,15 +1,7 @@
 import asyncio
-import os
-
-from aiogram import Bot, Dispatcher, types
-from aiogram.client.default import DefaultBotProperties
-from aiogram.enums import ParseMode
-from dotenv import find_dotenv, load_dotenv
-
+from bot_instance import bot
+from aiogram import Dispatcher, types
 from middlewares.db import DataBaseSession
-
-load_dotenv(find_dotenv())
-
 from database.engine import create_db, drop_db, session_maker
 from handlers.user_private import user_private_router
 from handlers.admin_private import admin_router
@@ -17,19 +9,10 @@ from common.bot_cmds_list import private
 
 
 #ALLOWED_UPDATES = ['message', 'edited_message', 'callback_query']
-bot = Bot(
-    token=os.getenv('TOKEN'),
-    default=DefaultBotProperties(parse_mode=ParseMode.HTML)
-)
+
 # bot.my_admins_list = [int(os.getenv('ADMIN_LIST'))]
 
 # Получение строки с администраторами из переменной окружения
-admins_str = os.getenv('ADMIN_LIST')
-# Проверка, что переменная не пуста, и создание списка администраторов
-if admins_str:
-    bot.my_admins_list = [int(admin_id) for admin_id in admins_str.split(',')]
-else:
-    bot.my_admins_list = []
 
 dp = Dispatcher()
 
@@ -52,7 +35,7 @@ async def main():
     dp.update.middleware(DataBaseSession(session_pool=session_maker))
     await bot.delete_webhook(drop_pending_updates=True)
     # await bot.delete_my_commands(scope=types.BotCommandScopeAllPrivateChats())
-    await bot.set_my_commands(commands=private, scope=types.BotCommandScopeAllPrivateChats())
+    #await bot.set_my_commands(commands=private, scope=types.BotCommandScopeAllPrivateChats())
     await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
 
 asyncio.run(main())

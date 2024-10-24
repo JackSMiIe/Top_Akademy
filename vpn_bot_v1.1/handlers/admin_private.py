@@ -1,16 +1,14 @@
-from pyexpat.errors import messages
-
 from aiogram import Router,types,F
 from aiogram.filters import Command, or_f, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup,State
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database.orm_query import orm_add_product, orm_get_products, orm_delete_product
 from filters.chat_types import ChatTypeFilter, IsAdmin
 from kbds.inline import get_inlineMix_btns
 from kbds.reply import get_keyboard
-
 ADMIN_KB = get_keyboard(
     "Добавить товар",
     "Ассортимент",
@@ -20,7 +18,6 @@ ADMIN_KB = get_keyboard(
 
 admin_router = Router()
 admin_router.message.filter(ChatTypeFilter(["private"]), IsAdmin())
-
 
 
 @admin_router.message(Command("admin"))

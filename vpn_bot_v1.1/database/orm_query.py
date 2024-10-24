@@ -35,3 +35,14 @@ async def orm_delete_product(session: AsyncSession, product_id: int):
     query = delete(Product).where(Product.id == product_id)
     await session.execute(query)
     await session.commit()
+
+# """Запрос цены для дальнейшей оплаты"""
+# async def orm_get_price(session: AsyncSession, product_id: int) -> int:
+#     query = select(Product.price).where(Product.id == product_id)
+#     result = await session.execute(query)
+#     price = result.scalar()
+#
+#     if price is not None:
+#         return int(price * 100)
+#     else:
+#         raise ValueError("Product not found")
