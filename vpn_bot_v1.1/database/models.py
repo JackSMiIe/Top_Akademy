@@ -14,6 +14,7 @@ class Product(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(15), nullable=False)
+    # count: Mapped[int] = mapped_column(Integer, nullable=False)
     price: Mapped[float] = mapped_column(DECIMAL(10,2), nullable=False)
 
 

@@ -52,12 +52,12 @@ async def change_price(message: types.Message):
 
 class AddProduct(StatesGroup):
     name = State()
-    #description = State()
+    #days_count = State()
     price = State()
 
     texts = {
         "AddProduct:name": "Введите название заново:",
-        "AddProduct:image": "Этот стейт последний, поэтому...",
+        "AddProduct:price": "Этот стейт последний, поэтому...",
     }
 
 @admin_router.message(StateFilter(None),F.text.lower() == 'добавить товар')
