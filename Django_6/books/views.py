@@ -61,3 +61,18 @@ class BookRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 def test_exception(request):
     # Представление для тестирования обработки исключений
     return render(request, 'books/non_existent_template.html')
+
+def custom_book_list(request):
+    author_name = request.GET.get('author')  # Получаем имя автора из GET-параметра
+    even_books = Book.booksManager.even_books()  # Получаем чётные книги
+
+    if author_name:
+        books_by_author = Book.booksManager.books_by_author(author_name)
+    else:
+        books_by_author = None
+
+    return render(request, 'books/custom_book_list.html', {
+        'even_books': even_books,
+        'books_by_author': books_by_author,
+        'author_name': author_name,
+    })
