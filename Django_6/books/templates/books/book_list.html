@@ -1,0 +1,72 @@
+<!-- books/templates/books/book_list.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список книг</title>
+    <!-- Подключаем Bootstrap с CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .pagination .current { font-weight: bold; color: red; }
+    </style>
+</head>
+<body class="container">
+
+    <h1 class="my-4">Список книг</h1>
+
+    <div class="row">
+        {% for book in page_obj %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text"><strong>Автор:</strong> {{ book.author.name }}</p>
+                        <p class="card-text"><strong>Жанр:</strong> {{ book.genre.name }}</p>
+                        <p class="card-text"><strong>Дата публикации:</strong> {{ book.publish_date }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Пагинация -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                </li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Ссылка на добавление книги -->
+    {% if user.is_authenticated and user.is_staff %}
+        <div class="text-center mt-4">
+            <a href="{% url 'add_book' %}" class="btn btn-primary">Добавить книгу</a>
+        </div>
+    {% endif %}
+
+    <!-- Подключаем JS Bootstrap и jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
