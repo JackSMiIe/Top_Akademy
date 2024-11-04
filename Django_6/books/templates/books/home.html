@@ -4,10 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Добро пожаловать в библиотеку</title>
+    <!-- Подключаем Bootstrap с CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Добро пожаловать в библиотеку!</h1>
-    <p>Это стартовая страница проекта "Книги".</p>
-    <a href="{% url 'book_list' %}">Посмотреть список книг</a>
+<body class="bg-light">
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Библиотека</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'book_list' %}">Список книг</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'author_list' %}">Список авторов</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <div class="container text-center mt-5">
+        <h1 class="display-4">Добро пожаловать в библиотеку!</h1>
+        <p class="lead">Это стартовая страница проекта "Книги". Здесь вы можете просмотреть список книг и авторов.</p>
+        <a href="{% url 'book_list' %}" class="btn btn-primary btn-lg mt-3">Посмотреть список книг</a>
+    </div>
+
+    <!-- Подключаем JS Bootstrap и jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
