@@ -4,6 +4,10 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from .models import Book, Author
 from .forms import BookForm
+from rest_framework import generics
+from .serializers import BookSerializer
+
+
 
 def book_list(request):
     query = request.GET.get('q')  # Получаем значение поискового запроса из GET-параметра
@@ -44,3 +48,12 @@ def add_book(request):
 def author_list(request):
     authors = Author.objects.all()
     return render(request, 'books/author_list.html', {'authors': authors})
+
+
+class BookListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+class BookRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
