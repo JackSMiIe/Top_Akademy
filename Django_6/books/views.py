@@ -57,3 +57,7 @@ class BookListCreateAPIView(generics.ListCreateAPIView):
 class BookRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+
+def test_exception(request):
+    # Представление для тестирования обработки исключений
+    return render(request, 'books/non_existent_template.html')

@@ -11,4 +11,5 @@ urlpatterns = [
     # API маршруты
     path('api/books/', BookListCreateAPIView.as_view(), name='book-list-create'),  # API для списка книг и создания
     path('api/books/<int:pk>/', BookRetrieveUpdateDestroyAPIView.as_view(), name='book-retrieve-update-destroy'),  # API для просмотра, обновления и удаления книги
+    path('test-exception/', views.test_exception, name='test_exception'),
 ]
